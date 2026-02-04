@@ -93,6 +93,7 @@ If planning is complete, respond with JSON:
     await client.call('chat.send', {
       sessionKey: task.planning_session_key,
       message: answerPrompt,
+      idempotencyKey: `planning-answer-${taskId}-${Date.now()}`,
     });
 
     // Update messages in DB

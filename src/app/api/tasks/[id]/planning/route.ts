@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/db';
 import { getOpenClawClient } from '@/lib/openclaw/client';
 
-// Planning session prefix for OpenClaw
-const PLANNING_SESSION_PREFIX = 'planning:';
+// Planning session prefix for OpenClaw (must match agent:main: format)
+const PLANNING_SESSION_PREFIX = 'agent:main:planning:';
 
 // GET /api/tasks/[id]/planning - Get planning state
 export async function GET(
@@ -130,6 +130,7 @@ Respond with ONLY valid JSON in this format:
     await client.call('chat.send', {
       sessionKey: sessionKey,
       message: planningPrompt,
+      idempotencyKey: `planning-start-${taskId}-${Date.now()}`,
     });
 
     // Store the session key and initial message
@@ -144,24 +145,54 @@ Respond with ONLY valid JSON in this format:
     // Poll for response (give OpenClaw time to process)
     // In production, this would be better handled with webhooks or SSE
     let response = null;
-    for (let i = 0; i < 30; i++) { // Poll for up to 30 seconds
+    for (let i = 0; i < 60; i++) { // Poll for up to 60 seconds
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       try {
-        const history = await client.call<{ messages: Array<{ role: string; content: string }> }>('chat.history', {
+        // Try sessions.preview to get last messages
+        const preview = await client.call<{ 
+          messages?: Array<{ role: string; content: string }>;
+          lastMessages?: Array<{ role: string; content: string }>;
+        }>('sessions.preview', {
           sessionKey: sessionKey,
-          limit: 10,
         });
         
-        if (history && history.messages) {
-          const assistantMessage = history.messages.find((m: { role: string }) => m.role === 'assistant');
+        console.log('[Planning] Preview response:', JSON.stringify(preview));
+        
+        const msgs = preview?.messages || preview?.lastMessages || [];
+        if (msgs.length > 0) {
+          const assistantMessage = msgs.find((m: { role: string }) => m.role === 'assistant');
           if (assistantMessage) {
             response = assistantMessage.content;
             break;
           }
         }
       } catch (err) {
-        console.log('Polling for response...', err);
+        console.log('[Planning] Polling for response...', err);
+        
+        // Fallback: try chat.history
+        try {
+          const history = await client.call<{ 
+            messages?: Array<{ role: string; content: string }>;
+            history?: Array<{ role: string; content: string }>;
+          }>('chat.history', {
+            sessionKey: sessionKey,
+            limit: 10,
+          });
+          
+          console.log('[Planning] History response:', JSON.stringify(history));
+          
+          const msgs = history?.messages || history?.history || [];
+          if (msgs.length > 0) {
+            const assistantMessage = msgs.find((m: { role: string }) => m.role === 'assistant');
+            if (assistantMessage) {
+              response = assistantMessage.content;
+              break;
+            }
+          }
+        } catch (histErr) {
+          console.log('[Planning] History fallback failed:', histErr);
+        }
       }
     }
 
