@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.1] - 2026-02-04
+
+### Changed
+
+- **Clickable Deliverables** - URL deliverables now have clickable titles and paths that open in new tabs
+- Improved visual feedback on deliverable links (hover states, external link icons)
+
+---
+
 ## [1.0.0] - 2026-02-04
 
 ### 🎉 First Official Release
@@ -91,5 +100,6 @@ This is the first stable, tested, and working release of Mission Control.
 
 ---
 
+[1.0.1]: https://github.com/crshdn/mission-control/releases/tag/v1.0.1
 [1.0.0]: https://github.com/crshdn/mission-control/releases/tag/v1.0.0
 [0.1.0]: https://github.com/crshdn/mission-control/releases/tag/v0.1.0
