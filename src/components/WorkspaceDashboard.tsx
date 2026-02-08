@@ -124,6 +124,7 @@ export function WorkspaceDashboard() {
 function WorkspaceCard({ workspace, onDelete }: { workspace: WorkspaceStats; onDelete: (id: string) => void }) {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const isArkeus = workspace.slug === 'arkeus';
 
   const handleDelete = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -144,11 +145,12 @@ function WorkspaceCard({ workspace, onDelete }: { workspace: WorkspaceStats; onD
       setShowDeleteConfirm(false);
     }
   };
-  
+
   return (
     <>
-    <Link href={`/workspace/${workspace.slug}`}>
-      <div className="bg-mc-bg-secondary border border-mc-border rounded-xl p-6 hover:border-mc-accent/50 transition-all hover:shadow-lg cursor-pointer group relative">
+    <div className="relative">
+      <Link href={isArkeus ? '/arkeus' : `/workspace/${workspace.slug}`}>
+        <div className="bg-mc-bg-secondary border border-mc-border rounded-xl p-6 hover:border-mc-accent/50 transition-all hover:shadow-lg cursor-pointer group relative">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
             <span className="text-3xl">{workspace.icon}</span>
@@ -190,6 +192,13 @@ function WorkspaceCard({ workspace, onDelete }: { workspace: WorkspaceStats; onD
         </div>
       </div>
     </Link>
+    {isArkeus && (
+      <div className="absolute top-3 right-3 bg-green-500/20 border border-green-500/40 rounded-full px-3 py-1 text-xs font-semibold text-green-400 flex items-center gap-1.5">
+        <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+        Live Data
+      </div>
+    )}
+    </div>
 
     {/* Delete Confirmation Modal */}
     {showDeleteConfirm && (
