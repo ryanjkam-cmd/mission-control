@@ -162,6 +162,46 @@ CREATE TABLE IF NOT EXISTS task_deliverables (
   created_at TEXT DEFAULT (datetime('now'))
 );
 
+-- Quick links table (hot links manager)
+CREATE TABLE IF NOT EXISTS quick_links (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  url TEXT NOT NULL,
+  category TEXT NOT NULL CHECK (category IN ('Notion', 'Google', 'External', 'Tool')),
+  tags TEXT,
+  clicks INTEGER DEFAULT 0,
+  last_accessed TEXT,
+  created_at TEXT DEFAULT (datetime('now')),
+  updated_at TEXT DEFAULT (datetime('now'))
+);
+
+-- Action queue table (approval system)
+CREATE TABLE IF NOT EXISTS action_queue (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  action_type TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'denied', 'auto_approved', 'edited')),
+  risk_level TEXT NOT NULL CHECK (risk_level IN ('low', 'medium', 'high')),
+  generated_at TEXT DEFAULT (datetime('now')),
+  reviewed_at TEXT,
+  action_data TEXT NOT NULL,
+  context_data TEXT,
+  confidence REAL,
+  user_feedback TEXT,
+  edited_data TEXT,
+  executed_at TEXT
+);
+
+-- Auto-approve rules table
+CREATE TABLE IF NOT EXISTS auto_approve_rules (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  action_type TEXT NOT NULL,
+  conditions TEXT NOT NULL,
+  enabled INTEGER DEFAULT 1,
+  created_at TEXT DEFAULT (datetime('now')),
+  times_triggered INTEGER DEFAULT 0,
+  success_rate REAL
+);
+
 -- Indexes for performance
 CREATE INDEX IF NOT EXISTS idx_tasks_status ON tasks(status);
 CREATE INDEX IF NOT EXISTS idx_tasks_assigned ON tasks(assigned_agent_id);
@@ -174,4 +214,10 @@ CREATE INDEX IF NOT EXISTS idx_activities_task ON task_activities(task_id, creat
 CREATE INDEX IF NOT EXISTS idx_deliverables_task ON task_deliverables(task_id);
 CREATE INDEX IF NOT EXISTS idx_openclaw_sessions_task ON openclaw_sessions(task_id);
 CREATE INDEX IF NOT EXISTS idx_planning_questions_task ON planning_questions(task_id, sort_order);
+CREATE INDEX IF NOT EXISTS idx_quick_links_category ON quick_links(category);
+CREATE INDEX IF NOT EXISTS idx_quick_links_clicks ON quick_links(clicks DESC);
+CREATE INDEX IF NOT EXISTS idx_action_queue_status ON action_queue(status);
+CREATE INDEX IF NOT EXISTS idx_action_queue_type ON action_queue(action_type);
+CREATE INDEX IF NOT EXISTS idx_action_queue_generated ON action_queue(generated_at DESC);
+CREATE INDEX IF NOT EXISTS idx_auto_approve_rules_type ON auto_approve_rules(action_type);
 `;

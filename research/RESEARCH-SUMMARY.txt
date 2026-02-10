@@ -1,0 +1,271 @@
+================================================================================
+CONTENT PRODUCTION & SOCIAL MEDIA MONITORING DASHBOARD RESEARCH
+================================================================================
+Research Date: February 8, 2026
+Platforms Analyzed: Buffer, Hootsuite, Later, CoSchedule, ContentCal
+
+================================================================================
+RESEARCH FILES STRUCTURE
+================================================================================
+
+research/
+├── README.md (14K)
+│   └── Overview, platform comparison, next steps, contact info
+│
+├── content-production-dashboard-patterns.md (21K)
+│   ├── 1. Content Management Patterns
+│   │   ├── Calendar view strategies (Buffer, Later, CoSchedule)
+│   │   ├── Kanban board workflows (ContentCal, Notion)
+│   │   └── Status indicators and filtering
+│   ├── 2. Data Visualization Patterns
+│   │   ├── Chart types (line, bar, pie, heatmap)
+│   │   ├── Engagement metrics display
+│   │   └── 2026 metric trends
+│   ├── 3. Real-Time Monitoring
+│   │   ├── Feed aggregation approaches
+│   │   ├── Alert and notification patterns
+│   │   └── Advanced detection (AI/ML)
+│   ├── 4. Sentiment Analysis Visualization
+│   │   ├── Sentiment categories (pos/neu/neg + emotions)
+│   │   ├── Visualization types (bar, heatmap, wordcloud)
+│   │   └── Dashboard best practices
+│   ├── 5. Multi-Platform Distribution
+│   │   ├── Video production workflows
+│   │   ├── Multi-format export strategies
+│   │   └── Automation and AI integration
+│   └── Platform Comparison Matrix
+│
+├── visual-examples-and-screenshots.md (15K)
+│   ├── Buffer Calendar Interface Details
+│   │   ├── Weekly view (channel, preview, thumbnail)
+│   │   ├── Monthly view (high-level snapshot)
+│   │   └── Mobile support (iOS/Android)
+│   ├── Later Visual Planner
+│   │   ├── Instagram grid preview
+│   │   ├── Drag-and-drop rearranging
+│   │   └── Multi-platform support
+│   ├── Hootsuite Analytics Dashboard
+│   │   ├── Three-section structure (Overview, Posts, Reports)
+│   │   ├── Engagement metrics display
+│   │   └── 2026 enhancements
+│   ├── Notion Kanban Board
+│   │   ├── Column structure and workflows
+│   │   ├── Multi-view flexibility
+│   │   └── Advanced features (templates, relations)
+│   ├── UI/UX Patterns Summary
+│   │   ├── Information hierarchy
+│   │   ├── Visual design principles
+│   │   └── Interaction patterns
+│   ├── Mobile Interface Considerations
+│   ├── Accessibility Patterns (WCAG compliance)
+│   ├── Performance Optimization
+│   ├── Dark Mode Considerations
+│   └── Error/Empty State Patterns
+│
+├── implementation-guide.md (34K)
+│   ├── Architecture Overview
+│   │   ├── Frontend stack (React, TypeScript, Tailwind)
+│   │   ├── Backend stack (FastAPI, PostgreSQL, Redis)
+│   │   └── Infrastructure (Docker, Kubernetes, CDN)
+│   ├── Component Architecture
+│   │   ├── CalendarView component (TypeScript)
+│   │   ├── KanbanBoard component
+│   │   ├── PostCard component
+│   │   └── AnalyticsDashboard component
+│   ├── Database Schema
+│   │   ├── PostgreSQL tables (users, teams, posts, analytics)
+│   │   ├── Indexes for performance
+│   │   └── Redis cache structure
+│   ├── API Endpoints
+│   │   ├── RESTful structure
+│   │   └── FastAPI implementation examples
+│   ├── Background Job Processing
+│   │   ├── Celery tasks (publish, sync)
+│   │   └── Scheduled job patterns
+│   ├── Real-Time Updates
+│   │   ├── WebSocket implementation
+│   │   └── Connection manager pattern
+│   ├── Frontend State Management
+│   │   ├── Zustand store examples
+│   │   └── WebSocket integration
+│   ├── Testing Strategies
+│   │   ├── Frontend tests (Vitest, React Testing Library)
+│   │   └── Backend tests (pytest)
+│   └── Performance Optimization Checklist
+│
+├── quick-reference-checklist.md (12K)
+│   ├── Calendar View Essentials
+│   ├── Kanban Board Essentials
+│   ├── Analytics Dashboard Essentials
+│   ├── Real-Time Monitoring Essentials
+│   ├── Post Creation/Editing Essentials
+│   ├── Status Indicators (visual conventions)
+│   ├── Platform Badges (brand colors)
+│   ├── Mobile Responsive Breakpoints
+│   ├── Accessibility Checklist
+│   ├── Performance Optimization
+│   ├── Database Schema Quick Reference
+│   ├── API Endpoints Quick Reference
+│   ├── Component Naming Conventions
+│   ├── Color Palette Reference
+│   ├── Common Formulas
+│   ├── Error Messages Best Practices
+│   ├── Testing Checklist
+│   └── Launch Day Checklist
+│
+└── RESEARCH-SUMMARY.txt (this file)
+
+Total: 5 files, 96KB of research documentation
+
+================================================================================
+KEY FINDINGS SUMMARY
+================================================================================
+
+CONTENT MANAGEMENT
+✓ Multi-view calendars (week/month/list) are industry standard
+✓ Drag-and-drop is essential for rescheduling
+✓ Status indicators use universal color conventions
+✓ Platform badges use brand colors for instant recognition
+
+DATA VISUALIZATION
+✓ Top-level KPI cards with sparklines
+✓ Line charts for trends, bar charts for comparisons
+✓ Heatmaps for best posting times
+✓ Real-time updates via WebSocket
+
+SOCIAL MONITORING
+✓ Unified inbox aggregates all platforms
+✓ Alert patterns: keyword, sentiment, volume spike
+✓ Sentiment evolving from 3-category to 6+ emotions
+✓ Intent classification (support, sales, advocacy)
+
+2026 TRENDS
+✓ Views replacing likes as primary metric
+✓ Private engagement (saves, shares) weighted higher
+✓ AI integration (caption generation, scheduling)
+✓ Extended historical tracking (1 year+)
+
+TECHNICAL ARCHITECTURE
+✓ React 18+ with TypeScript
+✓ PostgreSQL + Redis for data/caching
+✓ Celery for background publishing jobs
+✓ WebSockets for real-time updates
+✓ S3-compatible storage for media
+
+================================================================================
+PLATFORM COMPARISON
+================================================================================
+
+Buffer         → Best for: Small teams, simplicity
+                 Standout: Clean UI, drag-and-drop timeline
+
+Hootsuite      → Best for: Enterprise monitoring
+                 Standout: Social listening, Talkwalker
+
+Later          → Best for: Visual content, Instagram
+                 Standout: Instagram grid preview planner
+
+CoSchedule     → Best for: Marketing teams
+                 Standout: Unified marketing calendar, AI tools
+
+ContentCal     → Best for: Adobe ecosystem users
+                 Standout: Approval workflows, Adobe Express
+
+================================================================================
+IMPLEMENTATION PRIORITIES
+================================================================================
+
+MUST-HAVE (MVP)
+□ Multi-view calendar (week/month)
+□ Drag-and-drop scheduling
+□ Platform badges and status
+□ Media upload/preview
+□ Basic analytics
+□ Post creation/editing
+□ Scheduled publishing
+
+HIGH-PRIORITY (Phase 2)
+□ Kanban board view
+□ Approval workflows
+□ Team collaboration
+□ Real-time monitoring
+□ Sentiment analysis
+□ Exportable reports
+□ Mobile responsive
+
+ADVANCED (Phase 3)
+□ Instagram grid preview
+□ AI caption generation
+□ Advanced sentiment
+□ Competitive benchmarking
+□ Predictive analytics
+□ Custom dashboards
+□ Third-party API
+
+================================================================================
+METRICS TO TRACK
+================================================================================
+
+CONTENT PERFORMANCE
+• Impressions (total displays)
+• Reach (unique viewers)
+• Engagement rate ((L+C+S)/Reach)
+• Click-through rate
+• Save rate (Instagram/TikTok)
+
+ACCOUNT GROWTH
+• Follower growth (net new)
+• Follower churn (unfollows)
+• Profile views
+• Website clicks
+
+CONTENT EFFICIENCY
+• Publishing frequency
+• Time-to-publish
+• Approval rate
+• Schedule adherence
+
+TEAM PRODUCTIVITY
+• Posts created
+• Content pipeline
+• Average edit time
+• Collaboration score
+
+================================================================================
+PERFORMANCE TARGETS
+================================================================================
+
+Frontend: < 3s Time to Interactive (3G)
+Backend:  < 200ms API response (p95)
+Uptime:   99.9% (< 43min downtime/month)
+Cache:    > 80% hit rate for analytics
+
+================================================================================
+SOURCES
+================================================================================
+
+Buffer:      buffer.com, support.buffer.com
+Hootsuite:   hootsuite.com, blog.hootsuite.com
+Later:       later.com, help.later.com
+CoSchedule:  coschedule.com
+ContentCal:  contentcal.com (Adobe owned)
+
+Industry:    Improvado, Statusbrew, Sprout Social
+             Brandwatch, Meltwater, Vista Social
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. Review research documents
+2. Create wireframes in Figma
+3. Set up project infrastructure
+4. Implement MVP features
+5. User acceptance testing
+6. Launch and iterate
+
+================================================================================
+Research compiled by Claude Sonnet 4.5 for Arkeus Mission Control
+Location: /Users/ryankam/arkeus-mesh/mission-control/research/
+Last updated: February 8, 2026
+================================================================================

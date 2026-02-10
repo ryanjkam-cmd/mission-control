@@ -125,7 +125,13 @@ export function ArkeusDashboard() {
     }
   };
 
-  const metrics = status.metrics || {};
+  const metrics = (status.metrics || {}) as {
+    kill_rate?: number;
+    actions_passed?: number;
+    actions_killed?: number;
+    actions_generated?: number;
+    total_actions?: number;
+  };
   const killRate = metrics.kill_rate || 0;
   const passRate = metrics.actions_passed && metrics.total_actions
     ? ((metrics.actions_passed / metrics.total_actions) * 100).toFixed(1)

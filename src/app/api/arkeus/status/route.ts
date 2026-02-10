@@ -25,6 +25,6 @@ export async function GET() {
 
   return NextResponse.json({
     available: true,
-    ...result.data,
+    ...(result.data || {}),
   });
 }

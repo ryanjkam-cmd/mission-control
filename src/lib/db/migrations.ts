@@ -151,6 +151,75 @@ const migrations: Migration[] = [
         console.log('[Migration 004] Added planning_agents');
       }
     }
+  },
+  {
+    id: '005',
+    name: 'add_quick_links',
+    up: (db) => {
+      console.log('[Migration 005] Adding quick_links table...');
+
+      db.exec(`
+        CREATE TABLE IF NOT EXISTS quick_links (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          title TEXT NOT NULL,
+          url TEXT NOT NULL,
+          category TEXT NOT NULL CHECK (category IN ('Notion', 'Google', 'External', 'Tool')),
+          tags TEXT,
+          clicks INTEGER DEFAULT 0,
+          last_accessed TEXT,
+          created_at TEXT DEFAULT (datetime('now')),
+          updated_at TEXT DEFAULT (datetime('now'))
+        );
+      `);
+
+      db.exec(`CREATE INDEX IF NOT EXISTS idx_quick_links_category ON quick_links(category)`);
+      db.exec(`CREATE INDEX IF NOT EXISTS idx_quick_links_clicks ON quick_links(clicks DESC)`);
+
+      console.log('[Migration 005] quick_links table created');
+    }
+  },
+  {
+    id: '006',
+    name: 'add_approval_queue',
+    up: (db) => {
+      console.log('[Migration 006] Adding approval queue tables...');
+
+      db.exec(`
+        CREATE TABLE IF NOT EXISTS action_queue (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          action_type TEXT NOT NULL,
+          status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'denied', 'auto_approved', 'edited')),
+          risk_level TEXT NOT NULL CHECK (risk_level IN ('low', 'medium', 'high')),
+          generated_at TEXT DEFAULT (datetime('now')),
+          reviewed_at TEXT,
+          action_data TEXT NOT NULL,
+          context_data TEXT,
+          confidence REAL,
+          user_feedback TEXT,
+          edited_data TEXT,
+          executed_at TEXT
+        );
+      `);
+
+      db.exec(`
+        CREATE TABLE IF NOT EXISTS auto_approve_rules (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          action_type TEXT NOT NULL,
+          conditions TEXT NOT NULL,
+          enabled INTEGER DEFAULT 1,
+          created_at TEXT DEFAULT (datetime('now')),
+          times_triggered INTEGER DEFAULT 0,
+          success_rate REAL
+        );
+      `);
+
+      db.exec(`CREATE INDEX IF NOT EXISTS idx_action_queue_status ON action_queue(status)`);
+      db.exec(`CREATE INDEX IF NOT EXISTS idx_action_queue_type ON action_queue(action_type)`);
+      db.exec(`CREATE INDEX IF NOT EXISTS idx_action_queue_generated ON action_queue(generated_at DESC)`);
+      db.exec(`CREATE INDEX IF NOT EXISTS idx_auto_approve_rules_type ON auto_approve_rules(action_type)`);
+
+      console.log('[Migration 006] Approval queue tables created');
+    }
   }
 ];
 

@@ -1,0 +1,81 @@
+
+> mission-control@1.0.1 dev
+> next dev
+
+ ⚠ Invalid next.config.mjs options detected: 
+ ⚠     Unrecognized key(s) in object: 'serverComponentsExternalPackages' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ⚠ `experimental.serverComponentsExternalPackages` has been moved to `serverExternalPackages`. Please update your next.config.mjs file accordingly.
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/ryankam/package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * /Users/ryankam/arkeus-mesh/mission-control/package-lock.json
+
+ ⚠ Port 3000 is in use by process 97039, using available port 3003 instead.
+   ▲ Next.js 15.5.12
+   - Local:        http://localhost:3003
+   - Network:      http://192.168.7.163:3003
+   - Environments: .env.local
+   - Experiments (use with caution):
+     · serverComponentsExternalPackages
+
+ ✓ Starting...
+ ✓ Ready in 1330ms
+ ○ Compiling /action-queue ...
+ ✓ Compiled /action-queue in 1783ms (744 modules)
+ GET /action-queue 200 in 2118ms
+ ✓ Compiled in 369ms (309 modules)
+ GET /action-queue 200 in 164ms
+ ✓ Compiled /api/queue in 403ms (756 modules)
+ GET /api/queue 200 in 560ms
+ GET /api/queue 200 in 15ms
+ ✓ Compiled /_not-found in 123ms (761 modules)
+ GET /arkeus-systems/agents 404 in 193ms
+ GET /arkeus-systems/agents 404 in 150ms
+ GET /arkeus-systems/architecture 404 in 20ms
+ GET /arkeus-systems/architecture 404 in 51ms
+ GET /arkeus-systems/agents 404 in 23ms
+ GET /arkeus-systems/agents 404 in 43ms
+ GET /arkeus-systems/architecture 404 in 26ms
+ GET /arkeus-systems/architecture 404 in 73ms
+ GET /arkeus-systems/workflows 404 in 18ms
+ GET /arkeus-systems/workflows 404 in 72ms
+ GET /arkeus-systems/learning 404 in 18ms
+ GET /arkeus-systems/learning 404 in 71ms
+ ○ Compiling /cost-tracking ...
+ ✓ Compiled /cost-tracking in 1596ms (1775 modules)
+ GET /cost-tracking/forecast 404 in 900ms
+ GET /cost-tracking 200 in 1716ms
+ GET /cost-tracking/forecast 404 in 120ms
+ GET /cost-tracking/forecast 404 in 22ms
+ GET /cost-tracking/forecast 404 in 71ms
+ GET /cost-tracking/models 404 in 17ms
+ GET /cost-tracking/models 404 in 70ms
+ GET /social-monitoring/platforms 404 in 33ms
+ GET /social-monitoring/platforms 404 in 77ms
+ GET /social-monitoring/sentiment 404 in 21ms
+ GET /social-monitoring/sentiment 404 in 80ms
+ GET /social-monitoring/engagement 404 in 21ms
+ GET /social-monitoring/engagement 404 in 93ms
+ ○ Compiling /social-monitoring ...
+ ✓ Compiled /social-monitoring in 656ms (1833 modules)
+ GET /social-monitoring 200 in 751ms
+ GET /social-monitoring/engagement 404 in 27ms
+ GET /social-monitoring/engagement 404 in 118ms
+ GET /content-studio/pipeline 404 in 44ms
+ GET /content-studio/pipeline 404 in 100ms
+ GET /content-studio/social 404 in 39ms
+ GET /content-studio/social 404 in 115ms
+ GET /content-studio/video 404 in 15ms
+ GET /content-studio/video 404 in 70ms
+ GET /content-studio/blog 404 in 20ms
+ GET /content-studio/blog 404 in 72ms
+ GET /dashboard/live 404 in 29ms
+ GET /dashboard/live 404 in 76ms
+ ✓ Compiled /dashboard in 245ms (1812 modules)
+ GET /dashboard 200 in 420ms
+ GET /social-monitoring/platforms 404 in 44ms
+ GET /social-monitoring/platforms 404 in 175ms
+[?25h

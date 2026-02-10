@@ -16,6 +16,25 @@
   --mc-accent-purple: #a371f7;
   --mc-accent-pink: #db61a2;
   --mc-accent-cyan: #39d353;
+
+  /* Arkeus brand colors */
+  --brand-purple: #a855f7;
+  --brand-cyan: #22d3ee;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-bg-dark: rgba(0, 0, 0, 0.2);
+  --glass-border-dark: rgba(255, 255, 255, 0.1);
+}
+
+.dark {
+  --mc-bg: #0d1117;
+  --mc-bg-secondary: #161b22;
+  --mc-bg-tertiary: #21262d;
+  --mc-border: #30363d;
+  --mc-text: #c9d1d9;
+  --mc-text-secondary: #8b949e;
 }
 
 * {
@@ -106,6 +125,39 @@ body {
   @apply border-t-mc-accent-green;
 }
 
+/* Glassmorphism utilities */
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-dark {
+    background: var(--glass-bg-dark);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border-dark);
+  }
+
+  /* Gradient utilities */
+  .gradient-brand {
+    background: linear-gradient(135deg, var(--brand-purple) 0%, var(--brand-cyan) 100%);
+  }
+
+  .gradient-brand-border {
+    border-image: linear-gradient(135deg, var(--brand-purple) 0%, var(--brand-cyan) 100%) 1;
+  }
+
+  .gradient-text-brand {
+    background: linear-gradient(135deg, var(--brand-purple) 0%, var(--brand-cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
 /* Animations */
 @keyframes pulse-soft {
   0%, 100% { opacity: 1; }
@@ -131,7 +183,31 @@ body {
   animation: slide-in 0.2s ease-out;
 }
 
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
+
 /* Glow effect for online status */
 .online-glow {
   box-shadow: 0 0 10px var(--mc-accent-green), 0 0 20px var(--mc-accent-green);
+}
+
+/* Brand glow effects */
+.glow-brand-purple {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.1);
+}
+
+.glow-brand-cyan {
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.3), 0 0 40px rgba(34, 211, 238, 0.1);
 }

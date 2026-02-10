@@ -168,7 +168,7 @@ export interface TaskDeliverable {
 // Planning types
 export type PlanningQuestionType = 'multiple_choice' | 'text' | 'yes_no';
 
-export type PlanningCategory = 
+export type PlanningCategory =
   | 'goal'
   | 'audience'
   | 'scope'
@@ -304,4 +304,47 @@ export interface SSEEvent {
   } | {
     id: string;  // For task_deleted events
   };
+}
+
+// Action Queue types
+export type ActionType =
+  | 'email_reply'
+  | 'imessage'
+  | 'calendar_block'
+  | 'health_suggestion'
+  | 'trip_plan'
+  | 'task_create'
+  | 'reminder_create'
+  | 'notion_update'
+  | 'email'
+  | 'calendar'
+  | 'reminder'
+  | 'task'
+  | 'health'
+  | 'trip'
+  | 'notification';
+
+export type ActionStatus = 'pending' | 'approved' | 'denied' | 'auto_approved' | 'edited' | 'executed' | 'failed';
+export type RiskLevel = 'low' | 'medium' | 'high';
+
+export interface BrainAction {
+  id: string;
+  timestamp: string;
+  action: string;
+  tool: string;
+  result: string;
+  details?: string;
+  status: ActionStatus;
+  type: ActionType;
+  riskLevel: RiskLevel;
+  confidence?: number;
+  context?: string;
+  parameters?: Record<string, any>;
+  feedback?: string;
+}
+
+export interface ActionFilters {
+  status: ActionStatus | 'all';
+  type: ActionType | 'all';
+  riskLevel: RiskLevel | 'all';
 }
