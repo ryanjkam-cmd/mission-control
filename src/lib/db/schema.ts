@@ -202,6 +202,23 @@ CREATE TABLE IF NOT EXISTS auto_approve_rules (
   success_rate REAL
 );
 
+-- Build Projects table (autonomous project tracking)
+CREATE TABLE IF NOT EXISTS projects (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  goal TEXT,
+  status TEXT DEFAULT 'queued' CHECK (status IN ('queued','research','planning','building','testing','review','done','paused')),
+  current_phase INTEGER DEFAULT 1,
+  total_phases INTEGER DEFAULT 1,
+  phases TEXT,
+  assigned_agent_id TEXT REFERENCES agents(id),
+  target_path TEXT,
+  research_notes TEXT,
+  work_log TEXT,
+  created_at TEXT DEFAULT (datetime('now')),
+  updated_at TEXT DEFAULT (datetime('now'))
+);
+
 -- Indexes for performance
 CREATE INDEX IF NOT EXISTS idx_tasks_status ON tasks(status);
 CREATE INDEX IF NOT EXISTS idx_tasks_assigned ON tasks(assigned_agent_id);
@@ -220,4 +237,6 @@ CREATE INDEX IF NOT EXISTS idx_action_queue_status ON action_queue(status);
 CREATE INDEX IF NOT EXISTS idx_action_queue_type ON action_queue(action_type);
 CREATE INDEX IF NOT EXISTS idx_action_queue_generated ON action_queue(generated_at DESC);
 CREATE INDEX IF NOT EXISTS idx_auto_approve_rules_type ON auto_approve_rules(action_type);
+CREATE INDEX IF NOT EXISTS idx_projects_status ON projects(status);
+CREATE INDEX IF NOT EXISTS idx_projects_assigned ON projects(assigned_agent_id);
 `;

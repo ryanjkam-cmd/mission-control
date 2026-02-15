@@ -220,6 +220,36 @@ const migrations: Migration[] = [
 
       console.log('[Migration 006] Approval queue tables created');
     }
+  },
+  {
+    id: '007',
+    name: 'add_projects',
+    up: (db) => {
+      console.log('[Migration 007] Adding projects table...');
+
+      db.exec(`
+        CREATE TABLE IF NOT EXISTS projects (
+          id TEXT PRIMARY KEY,
+          name TEXT NOT NULL,
+          goal TEXT,
+          status TEXT DEFAULT 'queued' CHECK (status IN ('queued','research','planning','building','testing','review','done','paused')),
+          current_phase INTEGER DEFAULT 1,
+          total_phases INTEGER DEFAULT 1,
+          phases TEXT,
+          assigned_agent_id TEXT REFERENCES agents(id),
+          target_path TEXT,
+          research_notes TEXT,
+          work_log TEXT,
+          created_at TEXT DEFAULT (datetime('now')),
+          updated_at TEXT DEFAULT (datetime('now'))
+        );
+      `);
+
+      db.exec(`CREATE INDEX IF NOT EXISTS idx_projects_status ON projects(status)`);
+      db.exec(`CREATE INDEX IF NOT EXISTS idx_projects_assigned ON projects(assigned_agent_id)`);
+
+      console.log('[Migration 007] Projects table created');
+    }
   }
 ];
 

@@ -27,15 +27,11 @@ import {
   Target,
   AlertTriangle,
   Share2,
-  Search,
   Bookmark,
   StickyNote,
-  ExternalLink,
-  Settings,
+  Hammer,
   Wand2,
   Pencil,
-  ImagePlus,
-  Send,
   ChevronDown,
   ChevronRight,
   Menu,
@@ -91,6 +87,7 @@ const NAV_SECTIONS: NavSection[] = [
     items: [
       { label: 'Brain Mission Control', href: '/arkeus-systems', icon: Brain },
       { label: 'Action Queue', href: '/action-queue', icon: Target },
+      { label: 'Build Projects', href: '/projects', icon: Hammer },
       { label: 'Agent Topology', href: '/arkeus-systems/agents', icon: Network },
       { label: 'System Architecture', href: '/arkeus-systems/architecture', icon: Boxes },
       { label: 'Workflow Diagrams', href: '/arkeus-systems/workflows', icon: Workflow },
@@ -103,7 +100,7 @@ const NAV_SECTIONS: NavSection[] = [
     items: [
       { label: 'API Spend Dashboard', href: '/cost-tracking', icon: DollarSign },
       { label: 'Budget Forecasting', href: '/cost-tracking/forecast', icon: PieChart },
-      { label: 'Model Attribution', href: '/cost-tracking/models', icon: BarChart },
+      { label: 'Model Attribution', href: '/cost-tracking/attribution', icon: BarChart },
       { label: 'Anomaly Detection', href: '/cost-tracking/anomalies', icon: AlertTriangle },
     ],
   },
@@ -112,8 +109,6 @@ const NAV_SECTIONS: NavSection[] = [
     icon: Share2,
     items: [
       { label: 'Neo4j Explorer', href: '/knowledge-graph', icon: Share2 },
-      { label: 'Cluster Navigation', href: '/knowledge-graph/clusters', icon: Network },
-      { label: 'Semantic Search', href: '/knowledge-graph/search', icon: Search },
     ],
   },
   {
@@ -121,9 +116,6 @@ const NAV_SECTIONS: NavSection[] = [
     icon: Bookmark,
     items: [
       { label: 'Notion Dashboards', href: '/quick-links', icon: StickyNote },
-      { label: 'Google Docs', href: '/quick-links/docs', icon: FileText },
-      { label: 'External Tools', href: '/quick-links/external', icon: ExternalLink },
-      { label: 'Link Manager', href: '/quick-links/manager', icon: Settings },
     ],
   },
   {
@@ -131,8 +123,6 @@ const NAV_SECTIONS: NavSection[] = [
     icon: Wand2,
     items: [
       { label: 'Content Creation Workflow', href: '/ai-tools', icon: Pencil },
-      { label: 'Video/Image Tools', href: '/ai-tools/media', icon: ImagePlus },
-      { label: 'Distribution Pipeline', href: '/ai-tools/distribution', icon: Send },
     ],
   },
 ];
